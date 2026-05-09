@@ -36,12 +36,13 @@ export default function AuditPage() {
   };
 
   const handleSubmit = () => {
-    if (tools.length === 0) {
-      alert('Please add at least one tool!');
-      return;
-    }
-    router.push('/result/preview');
-  };
+  if (tools.length === 0) {
+    alert('Please add at least one tool!');
+    return;
+  }
+  localStorage.setItem('audit-input', JSON.stringify({ tools, teamSize, useCase }));
+  router.push('/result/preview');
+};
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
