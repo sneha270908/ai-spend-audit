@@ -70,22 +70,24 @@
 
 ## Day 3 — 2026-05-09
 
-**Hours worked:** 3
+**Hours worked:** 4
 
 **What I did:**
-- Fixed infinite reload issue by downgrading Next.js from 16 to 15
-- Fixed audit form — removed Zustand persist (was causing reload bug), used useState instead
-- Form now working: tools add/remove, plan dropdown, monthly spend, seats all functional
-- Identified that result page needs to be built next
+- Built audit engine with rule-based logic for all 8 tools
+- Built result page showing total monthly and annual savings
+- Per-tool breakdown with recommended actions and reasons
+- Lead capture email input added
+- Fixed infinite reload bug by downgrading Next.js
 
 **What I learned:**
-- Zustand persist middleware was causing hydration issues with Next.js 16 Turbopack
-- useState is simpler and more reliable for single-page form state
+- Turbopack in Next.js 16 had stability issues — Next.js 15 is more stable
+- Rule-based audit logic is cleaner than AI for math-heavy recommendations
 
 **Blockers / what I'm stuck on:**
-- Result page (404) needs to be built tomorrow
+- Tests not written yet — needed for assignment
+- Supabase backend not connected yet
 
 **Plan for tomorrow:**
-- Build audit engine logic (rule-based)
-- Build result page showing savings
-- Write 5+ tests
+- Write 5+ Jest tests for audit engine
+- Set up Supabase for lead storage
+- Connect email capture button
