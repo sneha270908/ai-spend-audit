@@ -5,9 +5,30 @@ import Link from 'next/link';
 import { runAudit } from '@/lib/audit-engine';
 import { TOOL_LABELS } from '@/lib/pricing-data';
 import { AuditResult } from '@/types';
+import { supabase } from '@/lib/supabase'
 
 export default function ResultPage() {
   const [result, setResult] = useState<AuditResult | null>(null);
+  const [email, setEmail] = useState('');
+const [submitted, setSubmitted] = useState(false);
+const [loading, setLoading] = useState(false);
+
+const handleEmailSubmit = async () => {
+  if (!email || !result) return;
+  setLoading(true);
+  try {
+    await supabase.from('leads').insert({
+      email,
+      team_size: result.input.teamSize,
+      total_monthly_savings: result.totalMonthlySavings,
+      audit_data: result.input,
+    });
+    setSubmitted(true);
+  } catch (err) {
+    console.error(err);
+  }
+  setLoading(false);
+};
 
   useEffect(() => {
     const stored = localStorage.getItem('audit-input');
@@ -107,26 +128,38 @@ export default function ResultPage() {
         </div>
 
         {/* Lead capture */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-          <h2 className="text-lg font-semibold mb-2">
-            {isLowSavings ? 'Get notified when new optimizations apply' : 'Get your full report'}
-          </h2>
-          <p className="text-gray-500 text-sm mb-4">
-            {isLowSavings
-              ? "You are optimized now, but AI pricing changes fast. We will alert you when you can save."
-              : 'Get a detailed PDF report and personalized recommendations.'}
-          </p>
-          <div className="flex gap-3">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            />
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">
-              Send Report
-            </button>
-          </div>
-        </div>
+<div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+  <h2 className="text-lg font-semibold mb-2">
+    {isLowSavings ? 'Get notified when new optimizations apply' : 'Get your full report'}
+  </h2>
+  <p className="text-gray-500 text-sm mb-4">
+    {isLowSavings
+      ? "You are optimized now, but AI pricing changes fast."
+      : 'Get a detailed PDF report and personalized recommendations.'}
+  </p>
+  {submitted ? (
+    <div className="bg-green-50 text-green-700 px-4 py-3 rounded-lg text-sm font-medium">
+      Done! We will be in touch soon.
+    </div>
+  ) : (
+    <div className="flex gap-3">
+      <input
+        type="email"
+        placeholder="your@email.com"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
+      />
+      <button
+        onClick={handleEmailSubmit}
+        disabled={loading}
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+      >
+        {loading ? 'Saving...' : 'Send Report'}
+      </button>
+    </div>
+  )}
+</div>
 
         <Link
           href="/audit"
