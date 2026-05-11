@@ -91,3 +91,28 @@
 - Write 5+ Jest tests for audit engine
 - Set up Supabase for lead storage
 - Connect email capture button
+
+## Day 4 — 2026-05-11
+
+**Hours worked:** 4
+
+**What I did:**
+- Wrote 7 automated tests for audit engine using Vitest — all passing
+- Set up Supabase project and leads table with SQL
+- Connected email capture button to Supabase database
+- Fixed 401 error by switching from legacy anon key to publishable key
+- Lead data (email, team size, savings) now successfully storing in database
+
+**What I learned:**
+- Supabase has new publishable keys — legacy anon keys give 401 errors
+- Vitest works perfectly with Next.js without complex configuration
+- RLS needs to be disabled for public insert access
+
+**Blockers / what I'm stuck on:**
+- Need to deploy to Vercel
+- All markdown documentation files still need to be written
+
+**Plan for tomorrow:**
+- Deploy to Vercel (live URL required for submission)
+- Write all required markdown files (README, ARCHITECTURE, GTM, ECONOMICS, etc.)
+- GitHub Actions CI setup
