@@ -126,3 +126,25 @@
 - Write README, ARCHITECTURE, GTM, ECONOMICS, REFLECTION, PRICING_DATA, PROMPTS, TESTS, LANDING_COPY, METRICS, USER_INTERVIEWS
 - Set up GitHub Actions CI
 - Do 3 user interviews
+
+---
+
+## Day 6 — 2026-05-12
+
+**Hours worked:** 6
+
+**What I did:**
+- Fixed GitHub Actions CI — updated to Node 20 and actions v4, now green
+- Wrote all required markdown files: README, ARCHITECTURE, REFLECTION, TESTS, PRICING_DATA, PROMPTS, GTM, ECONOMICS, LANDING_COPY, METRICS, USER_INTERVIEWS
+- Conducted 3 real user interviews with BE students
+- Final submission preparation
+
+**What I learned:**
+- User interviews revealed that subscription overlap (paying for multiple tools doing same job) is a bigger pain point than wrong plan selection
+- Students treat individual AI charges as "small expenses" but combined total shocks them
+
+**Blockers / what I'm stuck on:**
+- Nothing major — project is submission ready
+
+**Plan for tomorrow:**
+- Submit via Google Form before deadline
